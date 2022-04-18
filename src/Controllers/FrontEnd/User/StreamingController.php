@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
+use Mariojgt\TheWatcher\Helpers\VideoStreaming;
 
 class StreamingController extends Controller
 {
@@ -73,5 +74,22 @@ class StreamingController extends Controller
         }
 
         return response()->json(['success' => true]);
+    }
+
+    /**
+     * Start to stream the video
+     *
+     * @param Request $request
+     *
+     * @return [type]
+     */
+    public function streamingVideo(Request $request)
+    {
+        // File path
+        $target_dir = public_path("streaming/");
+        $target_file = $target_dir . 'test.webm';
+
+        $tmp = new VideoStreaming($target_file);
+        $tmp->start();
     }
 }

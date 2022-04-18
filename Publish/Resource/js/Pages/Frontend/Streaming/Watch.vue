@@ -5,7 +5,7 @@
         <video
           class="max-w-screen-lg rounded-lg shadow-2xl"
           id="video-streaming-watch"
-          autoplay
+          controls
         ></video>
 
         <button @click="startWatch">Start</button>
@@ -15,6 +15,8 @@
 </template>
 
 <script setup>
+// Import axios
+import axios from "axios";
 import { Inertia } from "@inertiajs/inertia";
 import { onMounted } from "vue";
 import { Link } from "@inertiajs/inertia-vue3";
@@ -46,19 +48,50 @@ const props = defineProps({
   },
 });
 
+// Next video key
+let keyCounter = $ref(0);
+// Time video has been playing
+let videoTimer = $ref(0);
+
 // Start sharing my screen
 const startWatch = async () => {
-  // Open the stream to the channel
-  const channel = pusher.subscribe("private-my-video06");
+  // Play the video
+  playSyncVideo();
 
-  channel.bind("client-02", function (data) {
-    // Make sure is a media stream
-    console.log(data);
-    // recivePeer(data);
+  const video = document.getElementById("video-streaming-watch");
+  // Set a event on the video is ended so we can fetch the new video data
+  video.addEventListener("ended", () => {
+    console.log("ended");
+    // Get the time the video has been playing
+    const videoTimer = video.currentTime;
+    playSyncVideo(videoTimer);
   });
 };
 
-setTimeout(() => {
-  startWatch();
-}, 1000);
+const playSyncVideo = async (startAtt = null) => {
+  keyCounter++;
+  // Find the video element
+  const video = document.getElementById("video-streaming-watch");
+  // Change the src tag to the stream
+  video.src = route("streaming.video.watch", keyCounter);
+  // Start the video at the time the video has been playing
+  if (startAtt) {
+    video.currentTime = startAtt;
+    // stop the video
+    video.pause();
+  } else {
+    // Start the video
+    video.play();
+  }
+  return video;
+};
+
+// Open the stream to the channel
+//   const channel = pusher.subscribe("private-my-video06");
+
+//   channel.bind("client-02", function (data) {
+//     // Make sure is a media stream
+//     console.log(data);
+//     // recivePeer(data);
+//   });
 </script>

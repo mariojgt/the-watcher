@@ -17,6 +17,7 @@
         "laravel/sanctum": "^2.9",
         "inertiajs/inertia-laravel": "^0.5.2",
         "tightenco/ziggy": "^1.4",
+        "pusher/pusher-php-server": "^7.0",
         "mariojgt/castle": "^1.0.1"
     },
     "autoload": {

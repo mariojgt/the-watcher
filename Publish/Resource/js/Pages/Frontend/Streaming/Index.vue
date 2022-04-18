@@ -86,12 +86,14 @@ const startScreenVideo = async () => {
   // Play the video stream
   video.play();
 
-  // Create a media record webm
-  const options = {
-    mimeType: "video/webm",
-  };
+  // Create the media record options to start the stream
+    const mediaRecorderOptions = {
+        mimeType: "video/webm",
+        videoBitsPerSecond: 2500000,
+        audioBitsPerSecond: 128000,
+    };
   // Create the media recorder
-  const mediaRecorder = new MediaRecorder(stream, options);
+  const mediaRecorder = new MediaRecorder(stream, mediaRecorderOptions);
 
   //   let constraints = {
   //     frameRate: 25,

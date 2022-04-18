@@ -51,8 +51,11 @@ Route::group([
     // User Streming
     Route::get('/streaming', [StreamingController::class, 'index'])->name('streaming.index');
     Route::get('/streaming/watch', [StreamingController::class, 'watch'])->name('streaming.watch');
-    // Streaming data
+
+    // Streaming data Api
     Route::post('/streaming/send', [StreamingController::class, 'reciveStreamingVideo'])->name('streaming.send');
+    Route::get('/streaming/video/watch/{key?}', [StreamingController::class, 'streamingVideo'])
+        ->name('streaming.video.watch');
 });
 
 Route::any('/pusher/auth', [StreamingController::class, 'pusherAuth']);
