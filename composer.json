@@ -1,0 +1,41 @@
+{
+    "name": "mariojgt/the-watcher",
+    "description": "Laravel Master Admin Panel",
+    "keywords": [
+        "laravel"
+    ],
+    "type": "laravel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "mario",
+            "email": "mariojgt2@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "laravel/sanctum": "^2.9",
+        "inertiajs/inertia-laravel": "^0.5.2",
+        "tightenco/ziggy": "^1.4",
+        "mariojgt/castle": "^1.0.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mariojgt\\TheWatcher\\": "src"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@php artisan route:list"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mariojgt\\TheWatcher\\TheWatcherProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
