@@ -1,6 +1,6 @@
 {
     "name": "mariojgt/the-watcher",
-    "description": "Laravel Master Admin Panel",
+    "description": "Laravel streamin service similar to youtube but is design to host video podcasts",
     "keywords": [
         "laravel"
     ],
